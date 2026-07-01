@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Super Admin – DIU Startup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="admin-layout">
+
+<!-- ============================= SIDEBAR ============================= -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon"><i class="fas fa-shield-halved"></i></div>
+    <div class="sidebar-logo-text">
+      <span class="brand">DIU Startup</span>
+      <span class="sub">SUPER ADMIN</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">OVERVIEW</div>
+    <div class="nav-item active" onclick="showSection('dashboard',this)"><i class="fas fa-chart-pie nav-icon"></i><span class="nav-label">Dashboard</span></div>
+
+    <div class="nav-section-label">PLATFORM</div>
+    <div class="nav-item" onclick="showSection('shops',this)"><i class="fas fa-store nav-icon"></i><span class="nav-label">Shop Management</span><span class="nav-badge" id="badge-shops">3</span></div>
+    <div class="nav-item" onclick="showSection('sellers',this)"><i class="fas fa-user-tie nav-icon"></i><span class="nav-label">Sellers</span></div>
+    <div class="nav-item" onclick="showSection('users',this)"><i class="fas fa-users nav-icon"></i><span class="nav-label">Users / Customers</span></div>
+    <div class="nav-item" onclick="showSection('orders',this)"><i class="fas fa-shopping-bag nav-icon"></i><span class="nav-label">All Orders</span><span class="nav-badge" id="badge-orders">24</span></div>
+    <div class="nav-item" onclick="showSection('products',this)"><i class="fas fa-box nav-icon"></i><span class="nav-label">Products</span><span class="nav-badge" id="badge-products">7</span></div>
+    <div class="nav-item" onclick="showSection('categories',this)"><i class="fas fa-th nav-icon"></i><span class="nav-label">Categories</span></div>
+
+    <div class="nav-section-label">FINANCE</div>
+    <div class="nav-item" onclick="showSection('payments',this)"><i class="fas fa-credit-card nav-icon"></i><span class="nav-label">Payments</span></div>
+    <div class="nav-item" onclick="showSection('commission',this)"><i class="fas fa-percentage nav-icon"></i><span class="nav-label">Commission</span></div>
+    <div class="nav-item" onclick="showSection('reports',this)"><i class="fas fa-chart-bar nav-icon"></i><span class="nav-label">Reports</span></div>
+
+    <div class="nav-section-label">CONTENT</div>
+    <div class="nav-item" onclick="showSection('banners',this)"><i class="fas fa-image nav-icon"></i><span class="nav-label">Banners</span></div>
+    <div class="nav-item" onclick="showSection('coupons',this)"><i class="fas fa-ticket-alt nav-icon"></i><span class="nav-label">Coupons</span></div>
+    <div class="nav-item" onclick="showSection('content',this)"><i class="fas fa-file-alt nav-icon"></i><span class="nav-label">CMS / Pages</span></div>
+
+    <div class="nav-section-label">SYSTEM</div>
+    <div class="nav-item" onclick="showSection('admins',this)"><i class="fas fa-user-shield nav-icon"></i><span class="nav-label">Admin Management</span></div>
+    <div class="nav-item" onclick="showSection('notifications',this)"><i class="fas fa-bell nav-icon"></i><span class="nav-label">Notifications</span><span class="nav-badge" id="badge-notif">9</span></div>
+    <div class="nav-item" onclick="showSection('logs',this)"><i class="fas fa-scroll nav-icon"></i><span class="nav-label">Activity Logs</span></div>
+    <div class="nav-item" onclick="showSection('settings',this)"><i class="fas fa-cog nav-icon"></i><span class="nav-label">Platform Settings</span></div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div style="display:flex;gap:6px;margin-bottom:8px">
+      <a href="../index.html" class="sidebar-store-btn" target="_blank" style="flex:1">
+        <i class="fas fa-store"></i><span>Visit Store</span>
+      </a>
+      <a href="../shop/index.html" class="sidebar-store-btn" target="_blank" style="flex:1;background:rgba(245,114,36,0.12);color:#f57224">
+        <i class="fas fa-store-alt"></i><span>Seller Panel</span>
+      </a>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar"><i class="fas fa-shield-halved"></i></div>
+      <div class="user-info">
+        <div class="user-name">Super Admin</div>
+        <div class="user-role">PLATFORM OWNER</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================= MAIN ============================= -->
+<div class="main-content" id="main-content">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <button class="topbar-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="topbar-breadcrumb">
+      <i class="fas fa-shield-halved" style="font-size:0.75rem;color:var(--primary)"></i>
+      <i class="fas fa-chevron-right" style="font-size:0.55rem;color:#cbd5e1"></i>
+      <span class="page-title" id="page-title-text">Dashboard</span>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-search">
+        <i class="fas fa-search" style="font-size:0.78rem"></i>
+        <input type="text" placeholder="Search shops, sellers, orders..." />
+      </div>
+      <button class="topbar-btn" onclick="showSection('notifications',null)">
+        <i class="fas fa-bell"></i><span class="tb-badge">9</span>
+      </button>
+      <button class="topbar-btn">
+        <i class="fas fa-question-circle"></i>
+      </button>
+      <div class="topbar-admin-pill">
+        <i class="fas fa-shield-halved" style="font-size:0.8rem"></i> Super Admin
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-content">
+
+    <!-- =================== 1. DASHBOARD =================== -->
+    <div class="section-panel active" id="section-dashboard">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Platform Overview</div>
+          <div class="section-subtitle">Real-time platform health and performance</div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Export Report</button>
+          <button class="btn btn-primary btn-sm" onclick="showSection('shops',null)"><i class="fas fa-plus"></i> Add Shop</button>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card indigo"><div class="stat-icon"><i class="fas fa-store"></i></div><div class="stat-info"><div class="stat-value">18</div><div class="stat-label">Total Shops</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 3 new this month</div></div></div>
+        <div class="stat-card orange"><div class="stat-icon"><i class="fas fa-user-tie"></i></div><div class="stat-info"><div class="stat-value">24</div><div class="stat-label">Total Sellers</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 5 pending approval</div></div></div>
+        <div class="stat-card blue"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-info"><div class="stat-value">1,842</div><div class="stat-label">Total Users</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 142 new this week</div></div></div>
+        <div class="stat-card green"><div class="stat-icon"><i class="fas fa-shopping-bag"></i></div><div class="stat-info"><div class="stat-value">4,621</div><div class="stat-label">Total Orders</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 14% from last month</div></div></div>
+        <div class="stat-card purple"><div class="stat-icon"><i class="fas fa-box"></i></div><div class="stat-info"><div class="stat-value">892</div><div class="stat-label">Total Products</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 67 added this week</div></div></div>
+        <div class="stat-card yellow"><div class="stat-icon"><i class="fas fa-taka-sign"></i></div><div class="stat-info"><div class="stat-value">৳48.6L</div><div class="stat-label">Total Revenue</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 22% from last month</div></div></div>
+        <div class="stat-card teal"><div class="stat-icon"><i class="fas fa-percentage"></i></div><div class="stat-info"><div class="stat-value">৳2.9L</div><div class="stat-label">Commission Earned</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 6% from last month</div></div></div>
+        <div class="stat-card pink"><div class="stat-icon"><i class="fas fa-star"></i></div><div class="stat-info"><div class="stat-value">4.6</div><div class="stat-label">Platform Rating</div><div class="stat-change up"><i class="fas fa-arrow-up"></i> 1,240 reviews</div></div></div>
+        <div class="stat-card red"><div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="stat-info"><div class="stat-value">7</div><div class="stat-label">Flagged Issues</div><div class="stat-change down"><i class="fas fa-exclamation"></i> Needs attention</div></div></div>
+      </div>
+
+      <!-- Charts -->
+      <div class="platform-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-chart-line"></i> Platform Revenue (2024)</div>
+            <div style="display:flex;gap:6px">
+              <button class="status-btn active" style="padding:5px 12px;font-size:0.72rem">Monthly</button>
+              <button class="status-btn" style="padding:5px 12px;font-size:0.72rem">Weekly</button>
+            </div>
+          </div>
+          <div class="card-body"><div class="chart-wrap" style="height:280px"><canvas id="platformRevenueChart"></canvas></div></div>
+        </div>
+        <div>
+          <!-- Top Shops -->
+          <div class="card" style="margin-bottom:16px">
+            <div class="card-header"><div class="card-title"><i class="fas fa-trophy"></i> Top Performing Shops</div></div>
+            <div class="card-body" id="top-shops-list" style="padding:10px 20px"></div>
+          </div>
+          <!-- Alerts -->
+          <div class="card">
+            <div class="card-header"><div class="card-title"><i class="fas fa-exclamation-triangle" style="color:var(--warning)"></i> System Alerts</div><span class="badge badge-danger">7</span></div>
+            <div class="card-body" id="system-alerts-list" style="padding:12px 20px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity + Shop Distribution -->
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-stream"></i> Recent Platform Activity</div></div>
+          <div class="card-body" id="activity-feed-el" style="padding:4px 20px"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-chart-donut"></i> Orders by Shop</div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:220px"><canvas id="shopOrdersChart"></canvas></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 2. SHOPS =================== -->
+    <div class="section-panel" id="section-shops">
+      <div class="section-header">
+        <div><div class="section-title">Shop Management</div><div class="section-subtitle">Manage all registered shops on the platform</div></div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-shop')"><i class="fas fa-plus"></i> Add Shop</button>
+      </div>
+      <div class="status-bar">
+        <button class="status-btn active" onclick="filterShops('all',this)">All (18)</button>
+        <button class="status-btn" onclick="filterShops('active',this)">Active (13)</button>
+        <button class="status-btn" onclick="filterShops('pending',this)">Pending Approval (3)</button>
+        <button class="status-btn" onclick="filterShops('suspended',this)">Suspended (2)</button>
+      </div>
+      <div class="card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Shop</th><th>Owner / Seller</th><th>Category</th><th>Products</th><th>Orders</th><th>Revenue</th><th>Commission</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="shops-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 3. SELLERS =================== -->
+    <div class="section-panel" id="section-sellers">
+      <div class="section-header">
+        <div><div class="section-title">Seller Management</div><div class="section-subtitle">Verify and manage all platform sellers</div></div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-seller')"><i class="fas fa-plus"></i> Invite Seller</button>
+      </div>
+      <div class="status-bar">
+        <button class="status-btn active" onclick="filterSellers('all',this)">All (24)</button>
+        <button class="status-btn" onclick="filterSellers('verified',this)">Verified (17)</button>
+        <button class="status-btn" onclick="filterSellers('pending',this)">Pending (5)</button>
+        <button class="status-btn" onclick="filterSellers('rejected',this)">Rejected (2)</button>
+      </div>
+      <div class="card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Seller</th><th>Shop</th><th>Phone</th><th>NID / Trade Lic.</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="sellers-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 4. USERS =================== -->
+    <div class="section-panel" id="section-users">
+      <div class="section-header">
+        <div><div class="section-title">User / Customer Management</div><div class="section-subtitle">All registered users across the platform</div></div>
+        <input type="text" class="form-control" style="width:260px" placeholder="🔍 Search users..." />
+      </div>
+      <div class="card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>User</th><th>Phone</th><th>Total Orders</th><th>Total Spent</th><th>Registered</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 5. ORDERS =================== -->
+    <div class="section-panel" id="section-orders">
+      <div class="section-header">
+        <div><div class="section-title">All Orders (Platform-wide)</div></div>
+        <div style="display:flex;gap:8px">
+          <select class="form-control" style="width:160px" id="order-shop-filter" onchange="filterOrdersByShop(this.value)">
+            <option value="">All Shops</option>
+            <option>DIU Startup</option><option>TechBD Store</option><option>FashionHub BD</option>
+          </select>
+          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Export</button>
+        </div>
+      </div>
+      <div class="status-bar">
+        <button class="status-btn active" onclick="filterOrders('all',this)">All</button>
+        <button class="status-btn" onclick="filterOrders('pending',this)">Pending</button>
+        <button class="status-btn" onclick="filterOrders('confirmed',this)">Confirmed</button>
+        <button class="status-btn" onclick="filterOrders('shipped',this)">Shipped</button>
+        <button class="status-btn" onclick="filterOrders('delivered',this)">Delivered</button>
+        <button class="status-btn" onclick="filterOrders('cancelled',this)">Cancelled</button>
+        <button class="status-btn" onclick="filterOrders('returned',this)">Returned</button>
+      </div>
+      <div class="card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Order ID</th><th>Shop</th><th>Customer</th><th>Amount</th><th>Commission</th><th>Payment</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 6. PRODUCTS =================== -->
+    <div class="section-panel" id="section-products">
+      <div class="section-header">
+        <div><div class="section-title">Product Management</div><div class="section-subtitle">Review and moderate all products across shops</div></div>
+        <div style="display:flex;gap:8px">
+          <select class="form-control" style="width:160px">
+            <option>All Shops</option><option>DIU Startup</option><option>TechBD Store</option>
+          </select>
+        </div>
+      </div>
+      <div class="status-bar">
+        <button class="status-btn active" onclick="filterProducts('all',this)">All (892)</button>
+        <button class="status-btn" onclick="filterProducts('pending',this)">Pending Review (7)</button>
+        <button class="status-btn" onclick="filterProducts('approved',this)">Approved (876)</button>
+        <button class="status-btn" onclick="filterProducts('rejected',this)">Rejected (9)</button>
+        <button class="status-btn" onclick="filterProducts('flagged',this)">Flagged (4)</button>
+      </div>
+      <div class="card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Product</th><th>Shop</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="products-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 7. CATEGORIES =================== -->
+    <div class="section-panel" id="section-categories">
+      <div class="section-header">
+        <div><div class="section-title">Global Category Management</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline" onclick="openModal('modal-add-subcat')"><i class="fas fa-sitemap"></i> Add Subcategory</button>
+          <button class="btn btn-primary" onclick="openModal('modal-add-cat')"><i class="fas fa-plus"></i> Add Category</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-th"></i> Categories</div></div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Icon</th><th>Subcats</th><th>Products</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="cats-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-sitemap"></i> Subcategories</div></div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Parent</th><th>Products</th><th>Actions</th></tr></thead>
+              <tbody id="subcats-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 8. PAYMENTS =================== -->
+    <div class="section-panel" id="section-payments">
+      <div class="section-header">
+        <div><div class="section-title">Payment Overview (Platform-wide)</div></div>
+        <div style="display:flex;gap:8px">
+          <select class="form-control" style="width:160px"><option>All Shops</option><option>DIU Startup</option></select>
+          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Export</button>
+        </div>
+      </div>
+      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="stat-card green"><div class="stat-icon"><i class="fas fa-check-circle"></i></div><div class="stat-info"><div class="stat-value">৳42.1L</div><div class="stat-label">Total Received</div></div></div>
+        <div class="stat-card yellow"><div class="stat-icon"><i class="fas fa-clock"></i></div><div class="stat-info"><div class="stat-value">৳3.4L</div><div class="stat-label">Pending</div></div></div>
+        <div class="stat-card red"><div class="stat-icon"><i class="fas fa-times-circle"></i></div><div class="stat-info"><div class="stat-value">৳1.2L</div><div class="stat-label">Refunded</div></div></div>
+        <div class="stat-card teal"><div class="stat-icon"><i class="fas fa-percentage"></i></div><div class="stat-info"><div class="stat-value">৳2.9L</div><div class="stat-label">Commission</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title"><i class="fas fa-history"></i> All Transactions</div></div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Txn ID</th><th>Order</th><th>Shop</th><th>Customer</th><th>Method</th><th>Amount</th><th>Commission</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="payments-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 9. COMMISSION =================== -->
+    <div class="section-panel" id="section-commission">
+      <div class="section-header">
+        <div><div class="section-title">Commission Management</div><div class="section-subtitle">Set commission rates per shop or category</div></div>
+        <button class="btn btn-primary" onclick="saveCommissionSettings()"><i class="fas fa-save"></i> Save Settings</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <!-- Global Commission -->
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-globe"></i> Global Commission Rates</div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Default Commission Rate (%)</label><input class="form-control" type="number" value="6" /></div>
+            <div class="form-group"><label class="form-label">Electronics (%)</label><input class="form-control" type="number" value="5" /></div>
+            <div class="form-group"><label class="form-label">Fashion (%)</label><input class="form-control" type="number" value="8" /></div>
+            <div class="form-group"><label class="form-label">Beauty (%)</label><input class="form-control" type="number" value="10" /></div>
+            <div class="form-group"><label class="form-label">Sports (%)</label><input class="form-control" type="number" value="7" /></div>
+          </div>
+        </div>
+        <!-- Per Shop Commission -->
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-store"></i> Per-Shop Overrides</div><button class="btn btn-primary btn-sm" onclick="openModal('modal-shop-commission')"><i class="fas fa-plus"></i></button></div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Shop</th><th>Rate (%)</th><th>Monthly Cap (৳)</th><th>Actions</th></tr></thead>
+              <tbody id="commission-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Commission Payout -->
+      <div class="card" style="margin-top:20px">
+        <div class="card-header"><div class="card-title"><i class="fas fa-money-bill-transfer"></i> Commission Payout History</div></div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Period</th><th>Shop</th><th>Total Sales</th><th>Rate</th><th>Commission</th><th>Status</th><th>Paid On</th></tr></thead>
+            <tbody id="payout-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 10. REPORTS =================== -->
+    <div class="section-panel" id="section-reports">
+      <div class="section-header">
+        <div><div class="section-title">Platform Reports & Analytics</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+          <button class="btn btn-outline btn-sm"><i class="fas fa-file-excel"></i> Excel</button>
+          <button class="btn btn-outline btn-sm"><i class="fas fa-file-csv"></i> CSV</button>
+        </div>
+      </div>
+      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="stat-card indigo"><div class="stat-icon"><i class="fas fa-sun"></i></div><div class="stat-info"><div class="stat-value">৳1.82L</div><div class="stat-label">Today Revenue</div></div></div>
+        <div class="stat-card orange"><div class="stat-icon"><i class="fas fa-calendar-week"></i></div><div class="stat-info"><div class="stat-value">৳9.6L</div><div class="stat-label">This Week</div></div></div>
+        <div class="stat-card green"><div class="stat-icon"><i class="fas fa-calendar-alt"></i></div><div class="stat-info"><div class="stat-value">৳48.6L</div><div class="stat-label">This Month</div></div></div>
+        <div class="stat-card purple"><div class="stat-icon"><i class="fas fa-calendar"></i></div><div class="stat-info"><div class="stat-value">৳3.8Cr</div><div class="stat-label">This Year</div></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px">
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-chart-area"></i> Revenue vs Commission Trend</div></div>
+          <div class="card-body"><div class="chart-wrap" style="height:260px"><canvas id="reportTrendChart"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-trophy"></i> Top Shops by Revenue</div></div>
+          <div class="card-body" id="top-shops-report" style="padding:10px 20px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 11. BANNERS =================== -->
+    <div class="section-panel" id="section-banners">
+      <div class="section-header">
+        <div><div class="section-title">Global Banner Management</div><div class="section-subtitle">Banners shown across all shops</div></div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-banner')"><i class="fas fa-upload"></i> Upload Banner</button>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchBannerTab('hero',this)">Hero Slider</button>
+        <button class="tab-btn" onclick="switchBannerTab('offer',this)">Offer Banners</button>
+        <button class="tab-btn" onclick="switchBannerTab('popup',this)">Popup</button>
+      </div>
+      <div id="banners-grid"></div>
+    </div>
+
+    <!-- =================== 12. COUPONS =================== -->
+    <div class="section-panel" id="section-coupons">
+      <div class="section-header">
+        <div><div class="section-title">Platform-wide Coupons</div><div class="section-subtitle">Coupons valid across all shops</div></div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-coupon')"><i class="fas fa-plus"></i> Create Coupon</button>
+      </div>
+      <div id="coupons-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px"></div>
+    </div>
+
+    <!-- =================== 13. CONTENT / CMS =================== -->
+    <div class="section-panel" id="section-content">
+      <div class="section-header">
+        <div><div class="section-title">CMS / Pages</div><div class="section-subtitle">Manage static pages and FAQs</div></div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-page')"><i class="fas fa-plus"></i> Add Page</button>
+      </div>
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:20px">
+        <div class="card" style="padding:12px">
+          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:1px;padding:8px 8px;margin-bottom:6px">Pages</div>
+          <div id="cms-page-list"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title" id="cms-edit-title"><i class="fas fa-file-alt"></i> About Us</div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Page Title</label><input class="form-control" value="About Us" /></div>
+            <div class="form-group"><label class="form-label">Content (HTML supported)</label><textarea class="form-control" rows="12" id="cms-content">We are DIU Startup — Bangladesh's premier student-powered e-commerce platform, empowering students and entrepreneurs to shop smart and sell with ease.
+
+Founded by the students of Daffodil International University, our mission is to bridge the gap between talented sellers and smart shoppers across Bangladesh.</textarea></div>
+            <div class="form-group"><label class="form-label">SEO Meta Description</label><input class="form-control" placeholder="Page meta description..." /></div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-outline"><i class="fas fa-eye"></i> Preview</button>
+              <button class="btn btn-primary" onclick="savePage()"><i class="fas fa-save"></i> Save Page</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 14. ADMIN MANAGEMENT =================== -->
+    <div class="section-panel" id="section-admins">
+      <div class="section-header">
+        <div><div class="section-title">Admin Management</div><div class="section-subtitle">Manage sub-admins and their permissions</div></div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-admin')"><i class="fas fa-plus"></i> Add Admin</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 400px;gap:20px">
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-user-shield"></i> Admin Accounts</div></div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Admin</th><th>Role</th><th>Email</th><th>Last Login</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="admins-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Role Permissions -->
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-key"></i> Role Permissions</div>
+            <select class="form-control" style="width:140px;font-size:0.8rem;padding:5px 10px" onchange="loadRolePerms(this.value)">
+              <option>Editor</option><option>Moderator</option><option>Support</option>
+            </select>
+          </div>
+          <div class="card-body" id="role-perms-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 15. NOTIFICATIONS =================== -->
+    <div class="section-panel" id="section-notifications">
+      <div class="section-header">
+        <div><div class="section-title">System Notifications</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm" onclick="markAllRead()"><i class="fas fa-check-double"></i> Mark All Read</button>
+          <button class="btn btn-primary btn-sm" onclick="openModal('modal-send-notif')"><i class="fas fa-paper-plane"></i> Send Notification</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 300px;gap:20px">
+        <div class="card">
+          <div class="card-body" id="notif-list" style="padding:4px 20px"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-paper-plane"></i> Broadcast Notification</div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label">Send To</label>
+              <select class="form-control"><option>All Users</option><option>All Sellers</option><option>Specific Shop</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">Title</label><input class="form-control" placeholder="Notification title" /></div>
+            <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" rows="3" placeholder="Notification message..."></textarea></div>
+            <button class="btn btn-primary" style="width:100%" onclick="sendBroadcast()"><i class="fas fa-paper-plane"></i> Send Broadcast</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 16. ACTIVITY LOGS =================== -->
+    <div class="section-panel" id="section-logs">
+      <div class="section-header">
+        <div><div class="section-title">Activity Logs</div><div class="section-subtitle">Full audit trail of all admin actions</div></div>
+        <div style="display:flex;gap:8px">
+          <input type="date" class="form-control" style="width:160px"/>
+          <select class="form-control" style="width:160px"><option>All Admins</option><option>Super Admin</option><option>Editor</option></select>
+          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Export</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Timestamp</th><th>Admin</th><th>Action</th><th>Module</th><th>Details</th><th>IP Address</th></tr></thead>
+            <tbody id="logs-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== 17. SETTINGS =================== -->
+    <div class="section-panel" id="section-settings">
+      <div class="section-header">
+        <div><div class="section-title">Platform Settings</div></div>
+        <button class="btn btn-primary" onclick="savePlatformSettings()"><i class="fas fa-save"></i> Save All</button>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchSettingsTab('general',this)">General</button>
+        <button class="tab-btn" onclick="switchSettingsTab('payment',this)">Payment Gateway</button>
+        <button class="tab-btn" onclick="switchSettingsTab('delivery',this)">Delivery</button>
+        <button class="tab-btn" onclick="switchSettingsTab('seo',this)">SEO</button>
+        <button class="tab-btn" onclick="switchSettingsTab('security',this)">Security</button>
+        <button class="tab-btn" onclick="switchSettingsTab('maintenance',this)">Maintenance</button>
+      </div>
+
+      <!-- General -->
+      <div class="tab-panel active card" id="settings-general" style="padding:24px">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Platform Name</label><input class="form-control" value="DIU Startup"/></div>
+          <div class="form-group"><label class="form-label">Platform Tagline</label><input class="form-control" value="Shop Smart, Live Better"/></div>
+          <div class="form-group"><label class="form-label">Support Email</label><input class="form-control" value="support@diustartup.com"/></div>
+          <div class="form-group"><label class="form-label">Support Phone</label><input class="form-control" value="+880 1900-000000"/></div>
+          <div class="form-group"><label class="form-label">Default Currency</label><select class="form-control"><option>BDT (৳)</option><option>USD ($)</option></select></div>
+          <div class="form-group"><label class="form-label">Default Language</label><select class="form-control"><option>English</option><option>বাংলা</option></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Platform Address</label><input class="form-control" value="Daffodil Smart City, Birulia, Savar, Dhaka-1216"/></div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:8px">
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">User Registration Open</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">Seller Registration Open</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox"/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">Guest Checkout</span></div>
+        </div>
+      </div>
+      <!-- Payment Gateway -->
+      <div class="tab-panel card" id="settings-payment" style="padding:24px">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">bKash Merchant Number</label><input class="form-control" value="01900-000000"/></div>
+          <div class="form-group"><label class="form-label">Nagad Merchant Number</label><input class="form-control" value="01900-000001"/></div>
+          <div class="form-group"><label class="form-label">Stripe Public Key</label><input class="form-control" placeholder="pk_live_..."/></div>
+          <div class="form-group"><label class="form-label">Stripe Secret Key</label><input class="form-control" type="password" placeholder="sk_live_..."/></div>
+          <div class="form-group"><label class="form-label">SSL Commerz Store ID</label><input class="form-control" placeholder="diu123"/></div>
+          <div class="form-group"><label class="form-label">SSL Commerz Store Pass</label><input class="form-control" type="password" placeholder="store_password"/></div>
+        </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px">
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">bKash Enabled</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">Nagad Enabled</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">Cash on Delivery</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox"/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">Card Payment (SSL)</span></div>
+        </div>
+      </div>
+      <!-- Delivery -->
+      <div class="tab-panel card" id="settings-delivery" style="padding:24px">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Default Delivery Charge (৳)</label><input class="form-control" type="number" value="60"/></div>
+          <div class="form-group"><label class="form-label">Free Delivery Above (৳)</label><input class="form-control" type="number" value="500"/></div>
+          <div class="form-group"><label class="form-label">Inside Dhaka (৳)</label><input class="form-control" type="number" value="60"/></div>
+          <div class="form-group"><label class="form-label">Outside Dhaka (৳)</label><input class="form-control" type="number" value="120"/></div>
+          <div class="form-group"><label class="form-label">Express Delivery Charge (৳)</label><input class="form-control" type="number" value="150"/></div>
+          <div class="form-group"><label class="form-label">Default Delivery Time</label><input class="form-control" value="2-4 Business Days"/></div>
+        </div>
+      </div>
+      <!-- SEO -->
+      <div class="tab-panel card" id="settings-seo" style="padding:24px">
+        <div class="form-group"><label class="form-label">Meta Title</label><input class="form-control" value="DIU Startup – Shop Smart, Live Better"/></div>
+        <div class="form-group"><label class="form-label">Meta Description</label><textarea class="form-control" rows="3">Bangladesh's premier student-powered e-commerce platform. Shop the best products at unbeatable prices with fast delivery.</textarea></div>
+        <div class="form-group"><label class="form-label">Meta Keywords</label><input class="form-control" value="e-commerce, bangladesh, diu, shop, online shopping"/></div>
+        <div class="form-group"><label class="form-label">Google Analytics ID</label><input class="form-control" placeholder="G-XXXXXXXXXX"/></div>
+        <div class="form-group"><label class="form-label">Facebook Pixel ID</label><input class="form-control" placeholder="1234567890"/></div>
+      </div>
+      <!-- Security -->
+      <div class="tab-panel card" id="settings-security" style="padding:24px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">Two-Factor Authentication for Admins</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">Rate Limiting (API)</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">CSRF Protection</span></div>
+          <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox"/><span class="toggle-slider"></span></label><span style="font-size:0.85rem;font-weight:600">IP Whitelist for Admin Panel</span></div>
+        </div>
+        <div class="form-group" style="margin-top:20px"><label class="form-label">Session Timeout (minutes)</label><input class="form-control" type="number" value="60" style="width:200px"/></div>
+        <div class="form-group"><label class="form-label">Max Login Attempts</label><input class="form-control" type="number" value="5" style="width:200px"/></div>
+      </div>
+      <!-- Maintenance -->
+      <div class="tab-panel card" id="settings-maintenance" style="padding:24px">
+        <div class="alert-box warning" style="margin-bottom:20px"><i class="fas fa-exclamation-triangle"></i><div><strong>Warning:</strong> Enabling maintenance mode will make the store inaccessible to customers.</div></div>
+        <div class="toggle-wrap" style="margin-bottom:20px"><label class="toggle-switch"><input type="checkbox" id="maintenance-toggle"/><span class="toggle-slider"></span></label><span style="font-size:0.9rem;font-weight:700">Enable Maintenance Mode</span></div>
+        <div class="form-group"><label class="form-label">Maintenance Message</label><textarea class="form-control" rows="3">We are currently performing scheduled maintenance. We'll be back shortly! Thank you for your patience.</textarea></div>
+        <div class="form-group"><label class="form-label">Expected Completion Time</label><input class="form-control" type="datetime-local"/></div>
+        <div class="form-group"><label class="form-label">Allowed IPs (Bypass)</label><textarea class="form-control" rows="2" placeholder="192.168.1.1&#10;10.0.0.1"></textarea></div>
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+</div><!-- /main-content -->
+</div><!-- /admin-layout -->
+
+<!-- ============================= MODALS ============================= -->
+
+<!-- Add Shop -->
+<div class="modal-overlay" id="modal-add-shop">
+  <div class="modal modal-lg">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-store" style="color:var(--primary)"></i> Add New Shop</div><button class="modal-close" onclick="closeModal('modal-add-shop')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Shop Name <span class="req">*</span></label><input class="form-control" placeholder="e.g. TechBD Store"/></div>
+        <div class="form-group"><label class="form-label">Shop URL Slug</label><input class="form-control" placeholder="techbd-store"/></div>
+        <div class="form-group"><label class="form-label">Owner Name <span class="req">*</span></label><input class="form-control" placeholder="Full name"/></div>
+        <div class="form-group"><label class="form-label">Owner Email <span class="req">*</span></label><input class="form-control" type="email" placeholder="seller@email.com"/></div>
+        <div class="form-group"><label class="form-label">Phone <span class="req">*</span></label><input class="form-control" placeholder="01XXXXXXXXX"/></div>
+        <div class="form-group"><label class="form-label">Category</label><select class="form-control"><option>Electronics</option><option>Fashion</option><option>Beauty</option><option>Mixed</option></select></div>
+        <div class="form-group"><label class="form-label">Commission Rate (%)</label><input class="form-control" type="number" value="6"/></div>
+        <div class="form-group"><label class="form-label">Initial Status</label><select class="form-control"><option>Active</option><option>Pending Approval</option></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">Shop Description</label><textarea class="form-control" rows="3"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-shop')">Cancel</button>
+      <button class="btn btn-primary" onclick="addShop()"><i class="fas fa-plus"></i> Create Shop</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Admin -->
+<div class="modal-overlay" id="modal-add-admin">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-user-shield" style="color:var(--primary)"></i> Add Sub-Admin</div><button class="modal-close" onclick="closeModal('modal-add-admin')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input class="form-control" placeholder="Admin full name"/></div>
+      <div class="form-group"><label class="form-label">Email <span class="req">*</span></label><input class="form-control" type="email" placeholder="admin@email.com"/></div>
+      <div class="form-group"><label class="form-label">Phone</label><input class="form-control" placeholder="01XXXXXXXXX"/></div>
+      <div class="form-group"><label class="form-label">Role <span class="req">*</span></label>
+        <select class="form-control"><option>Editor</option><option>Moderator</option><option>Support</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Password <span class="req">*</span></label><input class="form-control" type="password" placeholder="Minimum 8 characters"/></div>
+      <div class="toggle-wrap" style="margin-top:8px"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">Account Active</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-admin')">Cancel</button>
+      <button class="btn btn-primary" onclick="addAdmin()"><i class="fas fa-plus"></i> Create Admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Seller -->
+<div class="modal-overlay" id="modal-add-seller">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-user-tie" style="color:var(--primary)"></i> Invite Seller</div><button class="modal-close" onclick="closeModal('modal-add-seller')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Seller Name <span class="req">*</span></label><input class="form-control"/></div>
+      <div class="form-group"><label class="form-label">Email <span class="req">*</span></label><input class="form-control" type="email"/></div>
+      <div class="form-group"><label class="form-label">Phone <span class="req">*</span></label><input class="form-control"/></div>
+      <div class="form-group"><label class="form-label">Assign Shop</label><select class="form-control"><option>Create New Shop</option><option>DIU Startup</option><option>TechBD Store</option></select></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-seller')">Cancel</button>
+      <button class="btn btn-primary" onclick="inviteSeller()"><i class="fas fa-paper-plane"></i> Send Invitation</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Category -->
+<div class="modal-overlay" id="modal-add-cat">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-th" style="color:var(--primary)"></i> Add Category</div><button class="modal-close" onclick="closeModal('modal-add-cat')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Category Name <span class="req">*</span></label><input class="form-control" placeholder="e.g. Electronics"/></div>
+      <div class="form-group"><label class="form-label">Icon (Font Awesome)</label><input class="form-control" placeholder="fas fa-mobile-alt"/></div>
+      <div class="form-group"><label class="form-label">Description</label><textarea class="form-control" rows="2"></textarea></div>
+      <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">Active</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-cat')">Cancel</button>
+      <button class="btn btn-primary" onclick="addCategory()"><i class="fas fa-plus"></i> Add Category</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Subcategory -->
+<div class="modal-overlay" id="modal-add-subcat">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-sitemap" style="color:var(--primary)"></i> Add Subcategory</div><button class="modal-close" onclick="closeModal('modal-add-subcat')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Parent Category <span class="req">*</span></label><select class="form-control"><option>Electronics</option><option>Fashion</option><option>Beauty</option></select></div>
+      <div class="form-group"><label class="form-label">Subcategory Name <span class="req">*</span></label><input class="form-control" placeholder="e.g. Smartphones"/></div>
+      <div class="toggle-wrap"><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label><span style="font-size:0.85rem">Active</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-subcat')">Cancel</button>
+      <button class="btn btn-primary" onclick="addSubcat()"><i class="fas fa-plus"></i> Add Subcategory</button>
+    </div>
+  </div>
+</div>
+
+<!-- Shop Commission Override -->
+<div class="modal-overlay" id="modal-shop-commission">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-percentage" style="color:var(--primary)"></i> Set Shop Commission</div><button class="modal-close" onclick="closeModal('modal-shop-commission')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Shop</label><select class="form-control"><option>DIU Startup</option><option>TechBD Store</option><option>FashionHub BD</option></select></div>
+      <div class="form-group"><label class="form-label">Commission Rate (%)</label><input class="form-control" type="number" placeholder="6"/></div>
+      <div class="form-group"><label class="form-label">Monthly Cap (৳, leave 0 for unlimited)</label><input class="form-control" type="number" value="0"/></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-shop-commission')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveShopCommission()"><i class="fas fa-save"></i> Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Banner -->
+<div class="modal-overlay" id="modal-add-banner">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-image" style="color:var(--primary)"></i> Upload Banner</div><button class="modal-close" onclick="closeModal('modal-add-banner')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Banner Type</label><select class="form-control"><option>Hero Slider</option><option>Offer Banner</option><option>Popup</option></select></div>
+      <div class="form-group"><label class="form-label">Title</label><input class="form-control" placeholder="Banner title"/></div>
+      <div class="form-group"><label class="form-label">Link URL</label><input class="form-control" placeholder="https://..."/></div>
+      <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:30px;text-align:center;cursor:pointer" onclick="showToast('File picker opened','info')">
+        <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:var(--text-muted);margin-bottom:8px"></i>
+        <p style="font-size:0.83rem;color:var(--text-muted)">Click to upload banner<br/><span style="color:var(--primary)">1200×400px recommended</span></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-banner')">Cancel</button>
+      <button class="btn btn-primary" onclick="uploadBanner()"><i class="fas fa-upload"></i> Upload</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Coupon -->
+<div class="modal-overlay" id="modal-add-coupon">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-ticket-alt" style="color:var(--primary)"></i> Create Platform Coupon</div><button class="modal-close" onclick="closeModal('modal-add-coupon')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Coupon Code <span class="req">*</span></label>
+        <div style="display:flex;gap:8px"><input class="form-control" id="coupon-code" placeholder="PLATFORM20"/><button class="btn btn-outline" onclick="genCode()">Generate</button></div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Type</label><select class="form-control"><option>Percentage</option><option>Fixed Amount</option></select></div>
+        <div class="form-group"><label class="form-label">Value <span class="req">*</span></label><input class="form-control" type="number" placeholder="20"/></div>
+        <div class="form-group"><label class="form-label">Min. Order (৳)</label><input class="form-control" type="number" placeholder="1000"/></div>
+        <div class="form-group"><label class="form-label">Usage Limit</label><input class="form-control" type="number" placeholder="500"/></div>
+        <div class="form-group"><label class="form-label">Expiry Date <span class="req">*</span></label><input class="form-control" type="date"/></div>
+        <div class="form-group"><label class="form-label">Applicable Shops</label><select class="form-control"><option>All Shops</option><option>DIU Startup</option><option>TechBD Store</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-coupon')">Cancel</button>
+      <button class="btn btn-primary" onclick="createCoupon()"><i class="fas fa-plus"></i> Create Coupon</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add CMS Page -->
+<div class="modal-overlay" id="modal-add-page">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-file-alt" style="color:var(--primary)"></i> Add New Page</div><button class="modal-close" onclick="closeModal('modal-add-page')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Page Title <span class="req">*</span></label><input class="form-control" placeholder="e.g. Privacy Policy"/></div>
+      <div class="form-group"><label class="form-label">URL Slug</label><input class="form-control" placeholder="privacy-policy"/></div>
+      <div class="form-group"><label class="form-label">Category</label><select class="form-control"><option>Legal</option><option>Help</option><option>Company</option></select></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-page')">Cancel</button>
+      <button class="btn btn-primary" onclick="addCmsPage()"><i class="fas fa-plus"></i> Create Page</button>
+    </div>
+  </div>
+</div>
+
+<!-- Send Notification -->
+<div class="modal-overlay" id="modal-send-notif">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="fas fa-paper-plane" style="color:var(--primary)"></i> Send Notification</div><button class="modal-close" onclick="closeModal('modal-send-notif')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Send To</label><select class="form-control"><option>All Users</option><option>All Sellers</option><option>All Admins</option><option>Specific User</option></select></div>
+      <div class="form-group"><label class="form-label">Notification Type</label><select class="form-control"><option>General</option><option>Order Update</option><option>Promotion</option><option>System Alert</option></select></div>
+      <div class="form-group"><label class="form-label">Title <span class="req">*</span></label><input class="form-control" placeholder="Notification title"/></div>
+      <div class="form-group"><label class="form-label">Message <span class="req">*</span></label><textarea class="form-control" rows="4" placeholder="Notification message..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-send-notif')">Cancel</button>
+      <button class="btn btn-primary" onclick="sendNotification()"><i class="fas fa-paper-plane"></i> Send Now</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+<script src="admin.js"></script>
+</body>
+</html>

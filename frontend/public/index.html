@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIU Startup – Shop Smart, Live Better</title>
+  <meta name="description" content="DIU Startup is your ultimate online shopping destination in Bangladesh. Discover the best deals on electronics, fashion, home, beauty & more." />
+  <meta name="keywords" content="DIU Startup, online shopping Bangladesh, electronics, fashion, deals" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-left">
+        <span><i class="fas fa-phone-alt"></i> +880 1900-000000</span>
+        <span><i class="fas fa-envelope"></i> support@diustartup.com</span>
+      </div>
+      <div class="top-right">
+        <span><i class="fas fa-truck"></i> Free Delivery on orders over ৳500</span>
+        <a href="shop/index.html" id="top-seller-link">Seller Dashboard</a>
+        <a href="admin/index.html" id="top-admin-link" style="color:#a5b4fc"><i class="fas fa-shield-halved" style="font-size:0.7rem"></i> Super Admin</a>
+        <a href="#" id="top-help-link">Help Center</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="main-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" id="site-logo">
+        <div class="logo-icon"><i class="fas fa-rocket"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">DIU</span>
+          <span class="logo-sub">STARTUP</span>
+        </div>
+      </a>
+      <div class="search-wrapper" id="main-search">
+        <div class="search-category-select">
+          <select id="search-category-dropdown">
+            <option>All Categories</option>
+            <option>Electronics</option>
+            <option>Fashion</option>
+            <option>Home & Living</option>
+            <option>Beauty</option>
+            <option>Sports</option>
+          </select>
+        </div>
+        <input type="text" id="search-input" class="search-input" placeholder="Search for products, brands and categories..." />
+        <button class="search-btn" id="search-button"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-actions">
+        <a href="#" class="action-btn" id="header-wishlist">
+          <i class="fas fa-heart"></i>
+          <span class="action-label">Wishlist</span>
+          <span class="badge" id="wishlist-badge">0</span>
+        </a>
+        <a href="#" class="action-btn" id="header-cart" onclick="toggleCart(event)">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="action-label">Cart</span>
+          <span class="badge" id="cart-badge">0</span>
+        </a>
+        <a href="#" class="action-btn" id="header-account">
+          <i class="fas fa-user-circle"></i>
+          <span class="action-label">Account</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="main-navbar">
+    <div class="container nav-inner">
+      <div class="nav-categories-btn" id="all-categories-btn" onclick="toggleCategoryMenu()">
+        <i class="fas fa-th-large"></i> All Categories <i class="fas fa-chevron-down cat-arrow"></i>
+      </div>
+      <ul class="nav-links" id="nav-links-list">
+        <li><a href="#" class="nav-link active">Home</a></li>
+        <li><a href="#" class="nav-link">Electronics</a></li>
+        <li><a href="#" class="nav-link">Fashion</a></li>
+        <li><a href="#" class="nav-link">Home & Living</a></li>
+        <li><a href="#" class="nav-link">Beauty</a></li>
+        <li><a href="#" class="nav-link">Sports</a></li>
+        <li><a href="#flash-sale" class="nav-link flash-link"><i class="fas fa-bolt"></i> Flash Sale</a></li>
+        <li><a href="#top-brands" class="nav-link">Brands</a></li>
+      </ul>
+      <div class="nav-promo">
+        <i class="fas fa-tag"></i> Up to <strong>70% OFF</strong> today!
+      </div>
+    </div>
+    <div class="category-menu" id="category-menu">
+      <div class="container">
+        <div class="cat-menu-grid">
+          <a href="#" class="cat-menu-item"><i class="fas fa-mobile-alt"></i><span>Electronics</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-tshirt"></i><span>Fashion</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-couch"></i><span>Home & Living</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-magic"></i><span>Beauty</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-running"></i><span>Sports</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-book"></i><span>Books</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-gamepad"></i><span>Gaming</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-baby"></i><span>Baby & Kids</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-car"></i><span>Automotive</span></a>
+          <a href="#" class="cat-menu-item"><i class="fas fa-utensils"></i><span>Food & Grocery</span></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO BANNER SLIDER -->
+  <section class="hero-section" id="hero-section">
+    <div class="container hero-container">
+      <div class="hero-slider-wrap">
+        <div class="hero-slider" id="hero-slider">
+          <div class="slide active" id="slide-1">
+            <div class="slide-content">
+              <div class="slide-text">
+                <span class="slide-badge">🚀 New Arrival</span>
+                <h1 class="slide-title">Next-Gen<br/><span>Electronics</span></h1>
+                <p class="slide-desc">Discover the latest tech at unbeatable prices. Shop smartphones, laptops &amp; more.</p>
+                <div class="slide-price">Starting from <strong>৳2,499</strong></div>
+                <div class="slide-actions">
+                  <button class="btn-primary" id="slide1-shop-btn" onclick="showToast('Electronics category opened!')">Shop Now <i class="fas fa-arrow-right"></i></button>
+                  <button class="btn-outline" id="slide1-explore-btn">Explore All</button>
+                </div>
+              </div>
+              <div class="slide-image">
+                <img src="images/hero1.png" alt="Electronics Sale" />
+              </div>
+            </div>
+          </div>
+          <div class="slide" id="slide-2">
+            <div class="slide-content slide-content-red">
+              <div class="slide-text">
+                <span class="slide-badge badge-red">🔥 Flash Deals</span>
+                <h1 class="slide-title">Fashion<br/><span class="text-red">Sale Bonanza</span></h1>
+                <p class="slide-desc">Trendy styles at crazy low prices! Up to 70% off on top fashion brands today only.</p>
+                <div class="slide-price">Up to <strong class="text-red">70% OFF</strong></div>
+                <div class="slide-actions">
+                  <button class="btn-red" id="slide2-shop-btn" onclick="showToast('Fashion deals loaded!')">Grab Deals <i class="fas fa-fire"></i></button>
+                  <button class="btn-outline-white" id="slide2-explore-btn">View All</button>
+                </div>
+              </div>
+              <div class="slide-image">
+                <img src="images/hero2.png" alt="Fashion Sale" />
+              </div>
+            </div>
+          </div>
+          <div class="slide" id="slide-3">
+            <div class="slide-content slide-content-dark">
+              <div class="slide-text">
+                <span class="slide-badge badge-purple">⚡ Tech Week</span>
+                <h1 class="slide-title">Gadgets &amp;<br/><span class="text-purple">Gizmos</span></h1>
+                <p class="slide-desc">Power up your life with cutting-edge gadgets. Exclusive deals for early birds!</p>
+                <div class="slide-price">From <strong class="text-purple">৳999</strong></div>
+                <div class="slide-actions">
+                  <button class="btn-purple" id="slide3-shop-btn" onclick="showToast('Gadgets shop opened!')">Shop Gadgets <i class="fas fa-bolt"></i></button>
+                  <button class="btn-outline-light" id="slide3-explore-btn">Browse All</button>
+                </div>
+              </div>
+              <div class="slide-image">
+                <img src="images/hero3.png" alt="Tech Gadgets" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="slider-btn prev" id="slider-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next" id="slider-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="slider-dots" id="slider-dots">
+          <button class="dot active" id="dot-0" onclick="goToSlide(0)"></button>
+          <button class="dot" id="dot-1" onclick="goToSlide(1)"></button>
+          <button class="dot" id="dot-2" onclick="goToSlide(2)"></button>
+        </div>
+      </div>
+      <div class="hero-side-banners">
+        <div class="side-banner side-banner-1" id="side-banner-flash">
+          <div class="side-banner-content">
+            <i class="fas fa-bolt sb-icon"></i>
+            <span class="sb-label">Flash Sale</span>
+            <span class="sb-sub">Up to 60% OFF</span>
+            <a href="#flash-sale" class="sb-btn">Shop Now</a>
+          </div>
+        </div>
+        <div class="side-banner side-banner-2" id="side-banner-new">
+          <div class="side-banner-content">
+            <i class="fas fa-star sb-icon"></i>
+            <span class="sb-label">New Arrivals</span>
+            <span class="sb-sub">Latest Collection</span>
+            <a href="#new-arrivals" class="sb-btn">Explore</a>
+          </div>
+        </div>
+        <div class="side-banner side-banner-3" id="side-banner-brand">
+          <div class="side-banner-content">
+            <i class="fas fa-crown sb-icon"></i>
+            <span class="sb-label">Top Brands</span>
+            <span class="sb-sub">Premium Quality</span>
+            <a href="#top-brands" class="sb-btn">Discover</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO STRIP -->
+  <section class="promo-strip">
+    <div class="container promo-grid">
+      <div class="promo-item"><i class="fas fa-shipping-fast"></i><div><strong>Free Shipping</strong><span>On orders above ৳500</span></div></div>
+      <div class="promo-item"><i class="fas fa-undo-alt"></i><div><strong>Easy Returns</strong><span>7-day return policy</span></div></div>
+      <div class="promo-item"><i class="fas fa-shield-alt"></i><div><strong>Secure Payment</strong><span>100% protected checkout</span></div></div>
+      <div class="promo-item"><i class="fas fa-headset"></i><div><strong>24/7 Support</strong><span>We're always here</span></div></div>
+      <div class="promo-item"><i class="fas fa-certificate"></i><div><strong>100% Genuine</strong><span>Authentic products only</span></div></div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section categories-section" id="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Shop by Category</h2>
+        <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="categories-grid" id="categories-grid">
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fas fa-mobile-alt"></i></div><span>Electronics</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fas fa-tshirt"></i></div><span>Fashion</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><i class="fas fa-couch"></i></div><span>Home & Living</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#fa709a,#fee140)"><i class="fas fa-magic"></i></div><span>Beauty</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><i class="fas fa-running"></i></div><span>Sports</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#f7971e,#ffd200)"><i class="fas fa-book-open"></i></div><span>Books</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#30cfd0,#330867)"><i class="fas fa-gamepad"></i></div><span>Gaming</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><i class="fas fa-baby-carriage"></i></div><span>Baby & Kids</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#fd7043,#e64a19)"><i class="fas fa-car"></i></div><span>Automotive</span></a>
+        <a href="#" class="category-card"><div class="cat-icon-wrap" style="background:linear-gradient(135deg,#56ab2f,#a8e063)"><i class="fas fa-shopping-basket"></i></div><span>Grocery</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASH SALE -->
+  <section class="section flash-sale-section" id="flash-sale">
+    <div class="container">
+      <div class="flash-header">
+        <div class="flash-title-wrap">
+          <i class="fas fa-bolt flash-bolt"></i>
+          <h2 class="flash-title">Flash Sale</h2>
+          <i class="fas fa-bolt flash-bolt"></i>
+        </div>
+        <div class="flash-timer-wrap">
+          <span class="timer-label">Ends in:</span>
+          <div class="countdown">
+            <div class="time-block"><span id="hours">08</span><small>HRS</small></div>
+            <span class="colon">:</span>
+            <div class="time-block"><span id="minutes">45</span><small>MIN</small></div>
+            <span class="colon">:</span>
+            <div class="time-block"><span id="seconds">30</span><small>SEC</small></div>
+          </div>
+        </div>
+        <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="products-scroll" id="flash-products"></div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="section" id="featured-products">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">⭐ Curated Picks</span>
+          <h2 class="section-title">Featured Products</h2>
+        </div>
+        <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="tab-bar" id="featured-tabs">
+        <button class="tab-btn active" onclick="filterFeatured('all',this)">All</button>
+        <button class="tab-btn" onclick="filterFeatured('electronics',this)">Electronics</button>
+        <button class="tab-btn" onclick="filterFeatured('fashion',this)">Fashion</button>
+        <button class="tab-btn" onclick="filterFeatured('beauty',this)">Beauty</button>
+      </div>
+      <div class="products-grid" id="featured-grid"></div>
+    </div>
+  </section>
+
+  <!-- BEST SELLERS -->
+  <section class="section bestsellers-section" id="best-sellers">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">🏆 Most Popular</span>
+          <h2 class="section-title">Best Sellers</h2>
+        </div>
+        <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="bestsellers-layout">
+        <div class="bestseller-hero" id="bestseller-hero">
+          <div class="bs-hero-badge">#1 Best Seller</div>
+          <img src="images/laptop.png" alt="Best Seller Laptop" />
+          <div class="bs-hero-info">
+            <h3>UltraBook Pro X15</h3>
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              <span>(4.8k reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-now">৳89,999</span>
+              <span class="price-old">৳1,10,000</span>
+              <span class="discount-badge">-18%</span>
+            </div>
+            <button class="btn-primary" onclick="addToCart('UltraBook Pro X15', 89999)">Add to Cart <i class="fas fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <div class="bestsellers-list" id="bestsellers-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS -->
+  <section class="section" id="new-arrivals">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">🆕 Just In</span>
+          <h2 class="section-title">New Arrivals</h2>
+        </div>
+        <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="new-arrivals-grid" id="new-arrivals-grid"></div>
+    </div>
+  </section>
+
+  <!-- TRENDING PRODUCTS -->
+  <section class="section trending-section" id="trending-products">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">🔥 Trending Now</span>
+          <h2 class="section-title">Trending Products</h2>
+        </div>
+        <a href="#" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="products-scroll" id="trending-products-list"></div>
+    </div>
+  </section>
+
+  <!-- TOP BRANDS -->
+  <section class="section brands-section" id="top-brands">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">👑 Premium</span>
+          <h2 class="section-title">Top Brands</h2>
+        </div>
+      </div>
+      <div class="brands-track-wrap">
+        <div class="brands-track" id="brands-track">
+          <div class="brand-card"><span class="brand-letter" style="background:#1428A0">S</span><span>Samsung</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#555">A</span><span>Apple</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#0047AB">S</span><span>Sony</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#111">N</span><span>Nike</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#000">A</span><span>Adidas</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#c00">L</span><span>LG</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#FF6900">X</span><span>Xiaomi</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#0096D6">H</span><span>HP</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#007DB8">D</span><span>Dell</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#00539B">A</span><span>Asus</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#E20714">L</span><span>Lenovo</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#1428A0">S</span><span>Samsung</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#555">A</span><span>Apple</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#0047AB">S</span><span>Sony</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#111">N</span><span>Nike</span></div>
+          <div class="brand-card"><span class="brand-letter" style="background:#000">A</span><span>Adidas</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIAL OFFERS -->
+  <section class="section special-offers-section" id="special-offers">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">🎁 Exclusive</span>
+          <h2 class="section-title">Special Offers</h2>
+        </div>
+      </div>
+      <div class="offers-grid">
+        <div class="offer-card offer-mega">
+          <img src="images/special_offer.png" alt="Mega Sale" />
+          <div class="offer-overlay">
+            <span class="offer-badge">MEGA SALE</span>
+            <h3>Up to 70% OFF<br/>on Everything!</h3>
+            <p>Limited time offer – don't miss out!</p>
+            <button class="btn-primary" onclick="showToast('Mega Sale activated! 🎉')">Shop Now</button>
+          </div>
+        </div>
+        <div class="offers-sub-grid">
+          <div class="offer-card offer-sm">
+            <div class="offer-sm-content" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
+              <div><span class="offer-tag">Electronics</span><h4>Phones &amp; Gadgets</h4><p>Up to <strong>50% OFF</strong></p><a href="#" class="offer-link">Shop →</a></div>
+              <i class="fas fa-mobile-alt offer-icon"></i>
+            </div>
+          </div>
+          <div class="offer-card offer-sm">
+            <div class="offer-sm-content" style="background:linear-gradient(135deg,#8e0038,#c0003c)">
+              <div><span class="offer-tag">Fashion</span><h4>Apparel &amp; Accessories</h4><p>Up to <strong>60% OFF</strong></p><a href="#" class="offer-link">Shop →</a></div>
+              <i class="fas fa-tshirt offer-icon"></i>
+            </div>
+          </div>
+          <div class="offer-card offer-sm">
+            <div class="offer-sm-content" style="background:linear-gradient(135deg,#1b5e20,#2e7d32)">
+              <div><span class="offer-tag">Home &amp; Living</span><h4>Furniture &amp; Decor</h4><p>Up to <strong>45% OFF</strong></p><a href="#" class="offer-link">Shop →</a></div>
+              <i class="fas fa-couch offer-icon"></i>
+            </div>
+          </div>
+          <div class="offer-card offer-sm">
+            <div class="offer-sm-content" style="background:linear-gradient(135deg,#4a0072,#6a1b9a)">
+              <div><span class="offer-tag">Beauty</span><h4>Skincare &amp; Cosmetics</h4><p>Up to <strong>55% OFF</strong></p><a href="#" class="offer-link">Shop →</a></div>
+              <i class="fas fa-magic offer-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section" id="newsletter-section">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h2>📧 Subscribe &amp; Save!</h2>
+        <p>Get exclusive deals, new arrivals &amp; insider-only discounts straight to your inbox.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form" onsubmit="subscribeNewsletter(event)">
+        <input type="email" id="newsletter-email" placeholder="Enter your email address..." required />
+        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-brand-col">
+        <div class="footer-logo">
+          <i class="fas fa-rocket"></i>
+          <span>DIU Startup</span>
+        </div>
+        <p>Bangladesh's premier e-commerce destination — empowering students and entrepreneurs to shop smart.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Warranty</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sell with Us</h4>
+        <ul>
+          <li><a href="#">Seller Center</a></li>
+          <li><a href="#">Flash Sale Registration</a></li>
+          <li><a href="#">Advertise with Us</a></li>
+          <li><a href="#">Affiliate Program</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2024 DIU Startup. All rights reserved. | Designed with ❤️ for Bangladesh</p>
+        <div class="payment-methods">
+          <span>We accept:</span>
+          <i class="fab fa-cc-visa payment-icon"></i>
+          <i class="fab fa-cc-mastercard payment-icon"></i>
+          <i class="fab fa-cc-paypal payment-icon"></i>
+          <span class="payment-text">bKash</span>
+          <span class="payment-text">Nagad</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart(event)"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> My Cart</h3>
+      <button onclick="toggleCart(event)" id="close-cart-btn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty" id="cart-empty-msg">
+        <i class="fas fa-shopping-cart"></i>
+        <p>Your cart is empty</p>
+        <span>Add some products to get started!</span>
+      </div>
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-total">Total: <strong id="cart-total">৳0</strong></div>
+      <button class="btn-primary full-width" id="checkout-btn" onclick="showToast('Proceeding to checkout! 🛒')">Checkout <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast-notification"></div>
+
+  <!-- Scroll Top -->
+  <button class="scroll-top" id="scroll-top-btn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

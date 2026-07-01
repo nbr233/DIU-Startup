@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Product – DIU Startup</title>
+  <meta name="description" id="page-meta-desc" content="Shop the best products at DIU Startup." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="product.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-left">
+        <span><i class="fas fa-phone-alt"></i> +880 1900-000000</span>
+        <span><i class="fas fa-envelope"></i> support@diustartup.com</span>
+      </div>
+      <div class="top-right">
+        <span><i class="fas fa-truck"></i> Free Delivery on orders over ৳500</span>
+        <a href="shop/index.html">Seller Dashboard</a>
+        <a href="#">Help Center</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="main-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-rocket"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">DIU</span>
+          <span class="logo-sub">STARTUP</span>
+        </div>
+      </a>
+      <div class="search-wrapper" id="main-search">
+        <div class="search-category-select">
+          <select id="search-category-dropdown">
+            <option>All Categories</option>
+            <option>Electronics</option>
+            <option>Fashion</option>
+            <option>Home & Living</option>
+            <option>Beauty</option>
+          </select>
+        </div>
+        <input type="text" id="search-input" class="search-input" placeholder="Search for products..." />
+        <button class="search-btn" id="search-button"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-actions">
+        <a href="index.html" class="action-btn">
+          <i class="fas fa-heart"></i>
+          <span class="action-label">Wishlist</span>
+        </a>
+        <a href="#" class="action-btn" id="header-cart-btn" onclick="toggleCart(event)">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="action-label">Cart</span>
+          <span class="badge" id="cart-badge">0</span>
+        </a>
+        <a href="index.html" class="action-btn">
+          <i class="fas fa-user-circle"></i>
+          <span class="action-label">Account</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-categories-btn">
+        <i class="fas fa-th-large"></i> All Categories <i class="fas fa-chevron-down"></i>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html" class="nav-link">Electronics</a></li>
+        <li><a href="index.html" class="nav-link">Fashion</a></li>
+        <li><a href="index.html" class="nav-link">Home & Living</a></li>
+        <li><a href="index.html" class="nav-link">Beauty</a></li>
+        <li><a href="index.html" class="nav-link flash-link"><i class="fas fa-bolt"></i> Flash Sale</a></li>
+      </ul>
+      <div class="nav-promo">
+        <i class="fas fa-tag"></i> Up to <strong>70% OFF</strong> today!
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar" id="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" id="breadcrumb-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span class="bc-sep"><i class="fas fa-chevron-right"></i></span>
+        <a href="index.html" id="bc-category">Category</a>
+        <span class="bc-sep"><i class="fas fa-chevron-right"></i></span>
+        <span id="bc-product" class="bc-current">Product</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- MAIN PRODUCT SECTION -->
+  <section class="pd-main-section">
+    <div class="container pd-layout">
+
+      <!-- LEFT: IMAGE GALLERY -->
+      <div class="pd-gallery" id="pd-gallery">
+        <div class="pd-thumbnails" id="pd-thumbnails"></div>
+        <div class="pd-main-img-wrap" id="pd-main-img-wrap">
+          <div class="pd-badges" id="pd-badges"></div>
+          <img id="pd-main-img" src="" alt="" class="pd-main-img" />
+          <div class="pd-img-zoom-hint"><i class="fas fa-search-plus"></i> Hover to zoom</div>
+          <div class="pd-img-overlay" id="pd-img-overlay"></div>
+        </div>
+        <!-- Share & Wishlist -->
+        <div class="pd-actions-row">
+          <button class="pd-action-icon-btn" id="pd-wishlist-btn" onclick="toggleWishlist()">
+            <i class="far fa-heart" id="wishlist-icon"></i> Add to Wishlist
+          </button>
+          <button class="pd-action-icon-btn" onclick="shareProduct()">
+            <i class="fas fa-share-alt"></i> Share
+          </button>
+          <button class="pd-action-icon-btn" onclick="compareProduct()">
+            <i class="fas fa-exchange-alt"></i> Compare
+          </button>
+        </div>
+      </div>
+
+      <!-- MIDDLE: PRODUCT INFO -->
+      <div class="pd-info" id="pd-info">
+        <!-- Brand -->
+        <div class="pd-brand" id="pd-brand"></div>
+
+        <!-- Title -->
+        <h1 class="pd-title" id="pd-title">Loading...</h1>
+
+        <!-- Rating Row -->
+        <div class="pd-rating-row">
+          <div class="pd-stars" id="pd-stars"></div>
+          <span class="pd-rating-num" id="pd-rating-num"></span>
+          <span class="pd-review-count" id="pd-review-count"></span>
+          <span class="pd-divider">|</span>
+          <span class="pd-sold" id="pd-sold"></span>
+          <span class="pd-divider">|</span>
+          <span class="pd-stock" id="pd-stock"></span>
+        </div>
+
+        <!-- Price -->
+        <div class="pd-price-block" id="pd-price-block">
+          <div class="pd-flash-tag"><i class="fas fa-bolt"></i> Special Price</div>
+          <div class="pd-prices">
+            <span class="pd-price-now" id="pd-price-now"></span>
+            <span class="pd-price-old" id="pd-price-old"></span>
+            <span class="pd-discount-tag" id="pd-discount-tag"></span>
+          </div>
+          <div class="pd-savings" id="pd-savings"></div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="pd-highlights" id="pd-highlights">
+          <div class="pd-highlights-title">Key Highlights</div>
+          <ul class="pd-highlights-list" id="pd-highlights-list"></ul>
+        </div>
+
+        <!-- Color Options -->
+        <div class="pd-option-group" id="pd-color-group">
+          <div class="pd-option-label">Color: <strong id="pd-selected-color"></strong></div>
+          <div class="pd-color-options" id="pd-color-options"></div>
+        </div>
+
+        <!-- Size / Storage Options -->
+        <div class="pd-option-group" id="pd-size-group">
+          <div class="pd-option-label" id="pd-size-label">Size / Storage:</div>
+          <div class="pd-size-options" id="pd-size-options"></div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="pd-option-group">
+          <div class="pd-option-label">Quantity:</div>
+          <div class="pd-qty-wrap">
+            <button class="pd-qty-btn" id="pd-qty-minus" onclick="changeQty(-1)"><i class="fas fa-minus"></i></button>
+            <span class="pd-qty-display" id="pd-qty-display">1</span>
+            <button class="pd-qty-btn" id="pd-qty-plus" onclick="changeQty(1)"><i class="fas fa-plus"></i></button>
+            <span class="pd-qty-max" id="pd-qty-max"></span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="pd-cta-btns">
+          <button class="pd-add-cart-btn" id="pd-add-cart-btn" onclick="pdAddToCart()">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+          <button class="pd-buy-now-btn" id="pd-buy-now-btn" onclick="pdBuyNow()">
+            <i class="fas fa-bolt"></i> Buy Now
+          </button>
+        </div>
+
+        <!-- Delivery & Services -->
+        <div class="pd-services" id="pd-services">
+          <div class="pd-service-item">
+            <i class="fas fa-truck"></i>
+            <div>
+              <strong>Free Delivery</strong>
+              <span id="pd-delivery-time">2-3 Days</span>
+            </div>
+          </div>
+          <div class="pd-service-item">
+            <i class="fas fa-undo"></i>
+            <div>
+              <strong>Easy Return</strong>
+              <span id="pd-return-policy">7 Days</span>
+            </div>
+          </div>
+          <div class="pd-service-item">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+              <strong>Warranty</strong>
+              <span id="pd-warranty">1 Year</span>
+            </div>
+          </div>
+          <div class="pd-service-item">
+            <i class="fas fa-certificate"></i>
+            <div>
+              <strong>100% Genuine</strong>
+              <span>Authenticated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: SELLER CARD -->
+      <div class="pd-sidebar">
+        <!-- Seller Info -->
+        <div class="pd-seller-card" id="pd-seller-card">
+          <div class="pd-seller-header">
+            <div class="pd-seller-avatar" id="pd-seller-avatar"></div>
+            <div>
+              <div class="pd-seller-name" id="pd-seller-name"></div>
+              <div class="pd-seller-rating" id="pd-seller-rating"></div>
+            </div>
+          </div>
+          <div class="pd-seller-stats">
+            <div class="pd-seller-stat"><strong>98.2%</strong><span>Positive Feedback</span></div>
+            <div class="pd-seller-stat"><strong>3.2K+</strong><span>Products</span></div>
+            <div class="pd-seller-stat"><strong>5Y</strong><span>Since</span></div>
+          </div>
+          <button class="pd-seller-btn" onclick="showToast('Visiting seller store...')">Visit Store <i class="fas fa-arrow-right"></i></button>
+          <button class="pd-seller-btn pd-seller-btn-outline" onclick="showToast('Chat started with seller!')"><i class="fas fa-comments"></i> Chat with Seller</button>
+        </div>
+
+        <!-- Price Summary Card -->
+        <div class="pd-price-summary-card">
+          <div class="pd-summary-title">Order Summary</div>
+          <div class="pd-summary-row"><span>Price (1 item)</span><span id="summary-price"></span></div>
+          <div class="pd-summary-row discount"><span>Discount</span><span id="summary-discount" class="green"></span></div>
+          <div class="pd-summary-row"><span>Delivery</span><span class="green">FREE</span></div>
+          <div class="pd-summary-divider"></div>
+          <div class="pd-summary-row total"><span>Total Amount</span><span id="summary-total"></span></div>
+          <div class="pd-summary-note">Inclusive of all taxes</div>
+          <button class="pd-add-cart-btn" style="width:100%;justify-content:center;margin-top:12px" onclick="pdAddToCart()">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+          <button class="pd-buy-now-btn" style="width:100%;justify-content:center;margin-top:10px" onclick="pdBuyNow()">
+            <i class="fas fa-bolt"></i> Buy Now
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRODUCT DETAILS TABS -->
+  <section class="pd-tabs-section">
+    <div class="container">
+      <div class="pd-tabs" id="pd-tabs">
+        <button class="pd-tab active" id="tab-desc" onclick="switchTab('desc', this)">Description</button>
+        <button class="pd-tab" id="tab-specs" onclick="switchTab('specs', this)">Specifications</button>
+        <button class="pd-tab" id="tab-reviews" onclick="switchTab('reviews', this)">Reviews (<span id="tab-review-count">0</span>)</button>
+        <button class="pd-tab" id="tab-qna" onclick="switchTab('qna', this)">Q&amp;A</button>
+      </div>
+
+      <div class="pd-tab-content">
+        <!-- Description Panel -->
+        <div class="pd-tab-panel active" id="panel-desc">
+          <div class="pd-description" id="pd-description"></div>
+        </div>
+
+        <!-- Specifications Panel -->
+        <div class="pd-tab-panel" id="panel-specs">
+          <table class="pd-specs-table" id="pd-specs-table"></table>
+        </div>
+
+        <!-- Reviews Panel -->
+        <div class="pd-tab-panel" id="panel-reviews">
+          <div class="pd-reviews-layout">
+            <!-- Rating Summary -->
+            <div class="pd-rating-summary" id="pd-rating-summary"></div>
+            <!-- Review List -->
+            <div class="pd-review-list" id="pd-review-list"></div>
+          </div>
+          <!-- Write Review -->
+          <div class="pd-write-review">
+            <h3>Write a Review</h3>
+            <div class="pd-star-input" id="pd-star-input">
+              <span>Your Rating:</span>
+              <div class="star-select">
+                <i class="far fa-star" data-val="1" onclick="setReviewStar(1)"></i>
+                <i class="far fa-star" data-val="2" onclick="setReviewStar(2)"></i>
+                <i class="far fa-star" data-val="3" onclick="setReviewStar(3)"></i>
+                <i class="far fa-star" data-val="4" onclick="setReviewStar(4)"></i>
+                <i class="far fa-star" data-val="5" onclick="setReviewStar(5)"></i>
+              </div>
+            </div>
+            <textarea id="review-text" placeholder="Share your experience with this product..." rows="4"></textarea>
+            <input type="text" id="review-name" placeholder="Your Name" />
+            <button class="pd-submit-review-btn" onclick="submitReview()">Submit Review <i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+
+        <!-- Q&A Panel -->
+        <div class="pd-tab-panel" id="panel-qna">
+          <div class="pd-qna-list" id="pd-qna-list"></div>
+          <div class="pd-ask-question">
+            <h3>Ask a Question</h3>
+            <input type="text" id="qna-question" placeholder="Type your question about this product..." />
+            <button class="pd-submit-review-btn" onclick="submitQnA()">Ask Question <i class="fas fa-question-circle"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="section" id="related-products-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">🔁 You Might Also Like</span>
+          <h2 class="section-title">Related Products</h2>
+        </div>
+        <a href="index.html" class="view-all-link">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="products-grid" id="related-products-grid"></div>
+    </div>
+  </section>
+
+  <!-- RECENTLY VIEWED -->
+  <section class="section recently-viewed-section" id="recently-viewed-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-tag">👁️ Your History</span>
+          <h2 class="section-title">Recently Viewed</h2>
+        </div>
+      </div>
+      <div class="products-scroll" id="recently-viewed-grid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-brand-col">
+        <div class="footer-logo"><i class="fas fa-rocket"></i><span>DIU Startup</span></div>
+        <p>Bangladesh's premier e-commerce destination.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Shipping Info</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sell with Us</h4>
+        <ul>
+          <li><a href="#">Seller Center</a></li>
+          <li><a href="#">Advertise with Us</a></li>
+          <li><a href="#">Affiliate Program</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2024 DIU Startup. All rights reserved.</p>
+        <div class="payment-methods">
+          <span>We accept:</span>
+          <i class="fab fa-cc-visa payment-icon"></i>
+          <i class="fab fa-cc-mastercard payment-icon"></i>
+          <span class="payment-text">bKash</span>
+          <span class="payment-text">Nagad</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart(event)"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> My Cart</h3>
+      <button onclick="toggleCart(event)"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty">
+        <i class="fas fa-shopping-cart"></i>
+        <p>Your cart is empty</p>
+        <span>Add some products to get started!</span>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: <strong id="cart-total">৳0</strong></div>
+      <button class="btn-primary full-width" onclick="showToast('Proceeding to checkout!')">Checkout <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast-notification"></div>
+
+  <!-- Sticky Bottom Bar (Mobile) -->
+  <div class="pd-sticky-bar" id="pd-sticky-bar">
+    <div class="pd-sticky-price" id="pd-sticky-price"></div>
+    <button class="pd-add-cart-btn" onclick="pdAddToCart()"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+    <button class="pd-buy-now-btn" onclick="pdBuyNow()"><i class="fas fa-bolt"></i> Buy Now</button>
+  </div>
+
+  <!-- Scroll Top -->
+  <button class="scroll-top" id="scroll-top-btn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="products.js"></script>
+  <script src="product-page.js"></script>
+</body>
+</html>

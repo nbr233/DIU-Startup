@@ -32,11 +32,11 @@ export function RequireAuth({ children }) {
 }
 
 // Require specific role(s)
-export function RequireRole({ roles, children }) {
+export function RequireRole({ roles, loginPath = '/login', children }) {
   const { user, loading } = useAuth();
   const location = useLocation();
   if (loading) return <LoadingScreen />;
-  if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
+  if (!user) return <Navigate to={loginPath} state={{ from: location }} replace />;
   if (!roles.includes(user.role)) {
     // Redirect to appropriate dashboard
     if (user.role === 'superadmin') return <Navigate to="/admin" replace />;

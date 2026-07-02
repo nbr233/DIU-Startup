@@ -18,6 +18,7 @@ const BecomeSellerPage = lazy(() => import('./pages/shop/BecomeSellerPage'));
 
 // ── Super Admin pages
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminLoginPage = lazy(() => import('./pages/auth/AdminLoginPage'));
 
 function Loading() {
   return (
@@ -54,8 +55,9 @@ export default function App() {
             } />
 
             {/* ── Super Admin Routes ── */}
+            <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="/admin/*" element={
-              <RequireRole roles={['admin', 'superadmin']}>
+              <RequireRole roles={['admin', 'superadmin']} loginPath="/admin/login">
                 <AdminLayout />
               </RequireRole>
             } />

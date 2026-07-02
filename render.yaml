@@ -1,4 +1,4 @@
-﻿services:
+services:
   - type: web
     name: diu-startup-backend
     runtime: python
@@ -35,6 +35,7 @@
     name: diu-startup-redis
     plan: free
     maxmemoryPolicy: noeviction
+    ipAllowList: []
 
 databases:
   - name: diu-startup-db

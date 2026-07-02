@@ -2,6 +2,7 @@
 DIU Startup – Django Settings
 """
 import os
+import dj_database_url
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
@@ -10,7 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-diu-startup-change-in-production-key-2024')
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+
+# Render ও অন্যান্য hosting এর জন্য ALLOWED_HOSTS
+_allowed = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = _allowed + ['.onrender.com']
 
 DJANGO_APPS = [
     'daphne',
@@ -81,18 +85,26 @@ TEMPLATES = [
 
 # ASGI + WebSocket (Django Channels)
 ASGI_APPLICATION = 'config.asgi.application'
+REDIS_URL = config('REDIS_URL', default='redis://127.0.0.1:6379')
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [config('REDIS_URL', default='redis://127.0.0.1:6379')],
+            'hosts': [REDIS_URL],
         },
     },
 }
 
-# Database – PostgreSQL (with SQLite fallback option)
+# Database – Render DATABASE_URL অথবা manual config
+DATABASE_URL = config('DATABASE_URL', default=None)
 DB_ENGINE = config('DB_ENGINE', default='postgresql')
-if DB_ENGINE == 'sqlite':
+
+if DATABASE_URL:
+    # Render / Railway / Heroku – auto DATABASE_URL
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
+    }
+elif DB_ENGINE == 'sqlite':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

@@ -1017,7 +1017,7 @@ export default function ProductPage() {
           <div className="footer-col">
             <h4>Quick Links</h4>
             <ul>
-              <li><Link to="/shop">Become a Seller</Link></li>
+              <li><Link to="/become-seller">Become a Seller</Link></li>
               <li><a href="#">Help Center</a></li>
               <li><a href="#">Return Policy</a></li>
             </ul>

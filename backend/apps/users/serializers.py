@@ -31,10 +31,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=6)
     password2 = serializers.CharField(write_only=True, label='Confirm Password')
+    role = serializers.CharField(required=False, default='customer')
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'phone', 'password', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'password', 'password2', 'role']
 
     def validate(self, data):
         if data['password'] != data['password2']:
@@ -43,13 +44,14 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data.pop('password2')
+        role = validated_data.pop('role', 'customer')
         user = User.objects.create_user(
             email=validated_data['email'],
             password=validated_data['password'],
             first_name=validated_data.get('first_name', ''),
             last_name=validated_data.get('last_name', ''),
             phone=validated_data.get('phone', ''),
-            role='customer',
+            role=role,
         )
         return user
 

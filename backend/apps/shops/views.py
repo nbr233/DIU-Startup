@@ -37,6 +37,12 @@ class ShopViewSet(viewsets.ModelViewSet):
             counter += 1
         serializer.save(owner=self.request.user, slug=slug)
 
+        # Auto-promote user to seller role
+        user = self.request.user
+        if user.role != 'seller':
+            user.role = 'seller'
+            user.save()
+
     @action(detail=True, methods=['post'], permission_classes=[permissions.IsAdminUser])
     def approve(self, request, slug=None):
         shop = self.get_object()

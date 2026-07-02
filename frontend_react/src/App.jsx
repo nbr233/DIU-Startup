@@ -14,6 +14,7 @@ const AccountPage = lazy(() => import('./pages/customer/AccountPage'));
 
 // ── Seller Dashboard pages
 const ShopLayout = lazy(() => import('./pages/shop/ShopLayout'));
+const BecomeSellerPage = lazy(() => import('./pages/shop/BecomeSellerPage'));
 
 // ── Super Admin pages
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
@@ -43,6 +44,7 @@ export default function App() {
             {/* ── Auth Routes ── */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/become-seller" element={<BecomeSellerPage />} />
 
             {/* ── Seller Dashboard Routes ── */}
             <Route path="/shop/*" element={

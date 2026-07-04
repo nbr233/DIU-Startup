@@ -172,7 +172,7 @@ export default function BecomeSellerPage() {
         </p>
 
         {/* Stats row */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 40, marginTop: 24 }}>
+        <div className="resp-flex-row" style={{ marginTop: 24 }}>
           {[['0%', 'Commission (Intro)'], ['Free', 'Account Setup'], ['24/7', 'Support']].map(([val, label]) => (
             <div key={label} style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>{val}</div>
@@ -183,7 +183,7 @@ export default function BecomeSellerPage() {
       </div>
 
       {/* FORM CARD */}
-      <div style={{ maxWidth: 760, margin: '-24px auto 50px', padding: '0 20px' }}>
+      <div className="resp-form-container">
 
         {error && (
           <div style={{ padding: '12px 18px', background: '#fee2e2', borderLeft: '4px solid #ef4444', color: '#991b1b', fontSize: '0.88rem', borderRadius: 8, marginBottom: 18 }}>
@@ -205,7 +205,7 @@ export default function BecomeSellerPage() {
                 <span style={stepBadge(1)}>1</span> Owner Credentials
               </h2>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+              <div className="resp-grid-1-1" style={{ marginBottom: 14 }}>
                 <div>
                   <label style={labelStyle}>First Name</label>
                   <input type="text" name="first_name" required placeholder="Nurunnabi" value={formData.first_name} onChange={handleInputChange} style={inputStyle} />
@@ -216,7 +216,7 @@ export default function BecomeSellerPage() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+              <div className="resp-grid-1-1" style={{ marginBottom: 14 }}>
                 <div>
                   <label style={labelStyle}>Email Address <span style={{ color: '#94a3b8', fontWeight: 400 }}>(login username)</span></label>
                   <input type="email" name="email" required placeholder="seller@diustartup.com" value={formData.email} onChange={handleInputChange} style={inputStyle} />
@@ -227,7 +227,7 @@ export default function BecomeSellerPage() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div className="resp-grid-1-1">
                 <div>
                   <label style={labelStyle}>Password</label>
                   <input type="password" name="password" required placeholder="••••••••" value={formData.password} onChange={handleInputChange} style={inputStyle} />
@@ -253,7 +253,7 @@ export default function BecomeSellerPage() {
               </div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+            <div className="resp-grid-1-1" style={{ marginBottom: 14 }}>
               <div>
                 <label style={labelStyle}>Shop Name <span style={{ color: '#ef4444' }}>*</span></label>
                 <input type="text" name="shop_name" required placeholder="e.g. DIU Gadget Hub" value={formData.shop_name} onChange={handleInputChange} style={inputStyle} />
@@ -273,7 +273,7 @@ export default function BecomeSellerPage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
+            <div className="resp-grid-1-1" style={{ marginBottom: 14 }}>
               <div>
                 <label style={labelStyle}>Shop Contact Phone</label>
                 <input type="text" name="shop_phone" placeholder="019XXXXXXXX" value={formData.shop_phone} onChange={handleInputChange} style={inputStyle} />

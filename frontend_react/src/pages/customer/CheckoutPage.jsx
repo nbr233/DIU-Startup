@@ -16,7 +16,7 @@ export default function CheckoutPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const saved = localStorage.getItem('diu_cart');
+    const saved = localStorage.getItem('diu_startup_cart');
     if (saved) {
       setCart(JSON.parse(saved));
     }
@@ -53,8 +53,8 @@ export default function CheckoutPage() {
     
     setLoading(true);
     const orderItems = cart.map(item => ({
-      product: item.product.id,
-      quantity: item.quantity
+      product: item.id,
+      quantity: item.qty
     }));
 
     try {
@@ -67,7 +67,7 @@ export default function CheckoutPage() {
       });
       
       // Clear cart
-      localStorage.removeItem('diu_cart');
+      localStorage.removeItem('diu_startup_cart');
       alert('Order placed successfully!');
       navigate('/');
     } catch (err) {
@@ -78,8 +78,7 @@ export default function CheckoutPage() {
   };
 
   const cartTotal = cart.reduce((sum, item) => {
-    const price = item.product.discount_price || item.product.price;
-    return sum + (price * item.quantity);
+    return sum + (item.price * item.qty);
   }, 0);
 
   return (
@@ -93,7 +92,7 @@ export default function CheckoutPage() {
           </div>
         )}
 
-        <form onSubmit={handlePlaceOrder} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 30 }}>
+        <form onSubmit={handlePlaceOrder} className="resp-grid-2-1">
           {/* Left Panel: Address + Payment */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {/* Address */}
@@ -103,7 +102,7 @@ export default function CheckoutPage() {
                 <input type="text" name="name" placeholder="Full Name *" required value={shippingAddress.name} onChange={handleInputChange} style={{ width: '100%', padding: 10, border: '1px solid #cbd5e1', borderRadius: 6 }} />
                 <input type="text" name="phone" placeholder="Phone Number *" required value={shippingAddress.phone} onChange={handleInputChange} style={{ width: '100%', padding: 10, border: '1px solid #cbd5e1', borderRadius: 6 }} />
                 <textarea name="street" placeholder="Street Address / Room / Department *" required value={shippingAddress.street} onChange={handleInputChange} style={{ width: '100%', padding: 10, border: '1px solid #cbd5e1', borderRadius: 6, minHeight: 60 }} />
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                <div className="resp-grid-1-1">
                   <input type="text" name="city" placeholder="City" value={shippingAddress.city} onChange={handleInputChange} style={{ width: '100%', padding: 10, border: '1px solid #cbd5e1', borderRadius: 6 }} />
                   <input type="text" name="district" placeholder="District" value={shippingAddress.district} onChange={handleInputChange} style={{ width: '100%', padding: 10, border: '1px solid #cbd5e1', borderRadius: 6 }} />
                 </div>
@@ -113,7 +112,7 @@ export default function CheckoutPage() {
             {/* Payment */}
             <div style={{ background: '#fff', borderRadius: 8, padding: 20, border: '1px solid #cbd5e1' }}>
               <h3 style={{ marginBottom: 15 }}>Payment Method</h3>
-              <div style={{ display: 'flex', gap: 15 }}>
+              <div style={{ display: 'flex', gap: 15, flexWrap: 'wrap' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
                   <input type="radio" name="payment" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} />
                   <span>Cash on Delivery</span>
@@ -137,9 +136,9 @@ export default function CheckoutPage() {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxHeight: 200, overflowY: 'auto', marginBottom: 15 }}>
                 {cart.map(item => (
-                  <div key={item.product.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: '#475569' }}>{item.product.name.slice(0, 30)}... x{item.quantity}</span>
-                    <strong>৳{((item.product.discount_price || item.product.price) * item.quantity).toLocaleString()}</strong>
+                  <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+                    <span style={{ color: '#475569' }}>{item.name.slice(0, 30)}... x{item.qty}</span>
+                    <strong>৳{(item.price * item.qty).toLocaleString()}</strong>
                   </div>
                 ))}
               </div>

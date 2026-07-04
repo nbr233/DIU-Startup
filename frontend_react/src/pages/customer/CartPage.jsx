@@ -7,31 +7,30 @@ export default function CartPage() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('diu_cart');
+    const saved = localStorage.getItem('diu_startup_cart');
     if (saved) setCart(JSON.parse(saved));
   }, []);
 
   const updateCartQty = (productId, delta) => {
     const updated = cart.map(item => {
-      if (item.product.id === productId) {
-        const newQty = item.quantity + delta;
-        return newQty > 0 ? { ...item, quantity: newQty } : item;
+      if (item.id === productId) {
+        const newQty = item.qty + delta;
+        return newQty > 0 ? { ...item, qty: newQty } : item;
       }
       return item;
-    }).filter(item => item.quantity > 0);
+    }).filter(item => item.qty > 0);
     setCart(updated);
-    localStorage.setItem('diu_cart', JSON.stringify(updated));
+    localStorage.setItem('diu_startup_cart', JSON.stringify(updated));
   };
 
   const removeFromCart = (productId) => {
-    const updated = cart.filter(item => item.product.id !== productId);
+    const updated = cart.filter(item => item.id !== productId);
     setCart(updated);
-    localStorage.setItem('diu_cart', JSON.stringify(updated));
+    localStorage.setItem('diu_startup_cart', JSON.stringify(updated));
   };
 
   const cartTotal = cart.reduce((sum, item) => {
-    const price = item.product.discount_price || item.product.price;
-    return sum + (price * item.quantity);
+    return sum + (item.price * item.qty);
   }, 0);
 
   return (
@@ -46,25 +45,24 @@ export default function CartPage() {
             <Link to="/" className="btn-primary" style={{ display: 'inline-block', marginTop: 15, padding: '10px 20px', borderRadius: 8 }}>Go Shopping</Link>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 30 }}>
+          <div className="resp-grid-2-1">
             {/* Cart Items */}
             <div style={{ background: '#fff', borderRadius: 8, padding: 20, border: '1px solid #cbd5e1' }}>
               {cart.map(item => {
-                const price = item.product.discount_price || item.product.price;
                 return (
-                  <div key={item.product.id} style={{ display: 'flex', gap: 15, padding: '15px 0', borderBottom: '1px solid #e2e8f0', alignItems: 'center' }}>
-                    <img src={item.product.images?.[0]?.image || '/images/phone.png'} alt={item.product.name} style={{ width: 80, height: 80, objectFit: 'contain' }} />
+                  <div key={item.id} className="resp-cart-item">
+                    <img src={item.img || '/images/phone.png'} alt={item.name} style={{ width: 80, height: 80, objectFit: 'contain' }} />
                     <div style={{ flex: 1 }}>
-                      <h4 style={{ color: '#1e293b', fontWeight: 600 }}>{item.product.name}</h4>
-                      <span style={{ color: 'var(--primary)', fontWeight: 700 }}>৳{price}</span>
+                      <h4 style={{ color: '#1e293b', fontWeight: 600 }}>{item.name}</h4>
+                      <span style={{ color: 'var(--primary)', fontWeight: 700 }}>৳{item.price}</span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <button onClick={() => updateCartQty(item.product.id, -1)} style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: 4 }}>-</button>
-                      <span>{item.quantity}</span>
-                      <button onClick={() => updateCartQty(item.product.id, 1)} style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: 4 }}>+</button>
+                    <div className="qty-container" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <button onClick={() => updateCartQty(item.id, -1)} style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: 4 }}>-</button>
+                      <span>{item.qty}</span>
+                      <button onClick={() => updateCartQty(item.id, 1)} style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: 4 }}>+</button>
                     </div>
-                    <strong style={{ minWidth: 80, textAlign: 'right' }}>৳{(price * item.quantity).toLocaleString()}</strong>
-                    <button onClick={() => removeFromCart(item.product.id)} style={{ color: '#ef4444', background: 'none', marginLeft: 15 }}><i className="fas fa-trash"></i></button>
+                    <strong style={{ minWidth: 80, textAlign: 'right' }}>৳{(item.price * item.qty).toLocaleString()}</strong>
+                    <button className="remove-btn" onClick={() => removeFromCart(item.id)} style={{ color: '#ef4444', background: 'none', marginLeft: 15 }}><i className="fas fa-trash"></i></button>
                   </div>
                 );
               })}

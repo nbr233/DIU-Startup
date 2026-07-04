@@ -41,7 +41,7 @@ export default function AccountPage() {
       <div className="container">
         <h2 style={{ marginBottom: 25, fontFamily: 'Outfit, sans-serif', fontWeight: 800 }}>My Account</h2>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 30 }}>
+        <div className="resp-grid-1-2">
           {/* Profile Details */}
           <div style={{ background: '#fff', borderRadius: 8, padding: 20, border: '1px solid #cbd5e1', height: 'fit-content' }}>
             <h3 style={{ marginBottom: 15, borderBottom: '1px solid #e2e8f0', paddingBottom: 10 }}>Profile Info</h3>
@@ -73,7 +73,7 @@ export default function AccountPage() {
               {addresses.length === 0 ? (
                 <p style={{ color: '#64748b' }}>No addresses saved yet.</p>
               ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
+                <div className="resp-grid-1-1">
                   {addresses.map(addr => (
                     <div key={addr.id} style={{ border: '1px solid #e2e8f0', padding: 12, borderRadius: 6, position: 'relative' }}>
                       <span className="tag" style={{ position: 'absolute', top: 12, right: 12 }}>{addr.label}</span>

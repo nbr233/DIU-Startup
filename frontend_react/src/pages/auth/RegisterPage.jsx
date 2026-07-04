@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: '#f1f4f9', fontFamily: 'Inter, sans-serif' }}>
-      <div style={{ background: '#fff', borderRadius: 12, padding: 35, boxShadow: '0 4px 16px rgba(0,0,0,0.06)', width: '100%', maxWidth: 450, border: '1px solid #e2e8f0' }}>
+      <div className="resp-auth-card" style={{ maxWidth: 450 }}>
         
         <div style={{ textAlign: 'center', marginBottom: 25 }}>
           <div style={{ display: 'inline-flex', width: 50, height: 50, background: 'linear-gradient(135deg, var(--primary), var(--primary-dark))', borderRadius: 12, alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '1.4rem', boxShadow: '0 4px 14px rgba(99,102,241,0.35)' }}>
@@ -56,7 +56,7 @@ export default function RegisterPage() {
         )}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <div className="resp-grid-1-1">
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#475569', marginBottom: 5 }}>First Name</label>
               <input type="text" name="first_name" required placeholder="John" value={formData.first_name} onChange={handleInputChange} style={{ width: '100%', padding: 9, border: '1.5px solid #cbd5e1', borderRadius: 8, outline: 'none' }} />

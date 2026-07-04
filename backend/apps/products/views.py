@@ -25,7 +25,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
-        return [permissions.IsAdminUser()]
+        return [permissions.IsAuthenticated()]
 
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
@@ -34,7 +34,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
-        return [permissions.IsAdminUser()]
+        return [permissions.IsAuthenticated()]
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()

@@ -7,17 +7,17 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://diu-startup-backend.onrender.com',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
       },
       '/media': {
-        target: 'https://diu-startup-backend.onrender.com',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
       },
       '/ws': {
-        target: 'wss://diu-startup-backend.onrender.com',
+        target: 'ws://localhost:8000',
         ws: true,
         changeOrigin: true,
       }

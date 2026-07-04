@@ -37,7 +37,7 @@ export default function LoginPage() {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: '#f1f4f9', fontFamily: 'Inter, sans-serif' }}>
-      <div style={{ background: '#fff', borderRadius: 12, padding: 35, boxShadow: '0 4px 16px rgba(0,0,0,0.06)', width: '100%', maxWidth: 420, border: '1px solid #e2e8f0' }}>
+      <div className="resp-auth-card" style={{ maxWidth: 420 }}>
         
         <div style={{ textAlign: 'center', marginBottom: 25 }}>
           <div style={{ display: 'inline-flex', width: 50, height: 50, background: 'linear-gradient(135deg, var(--primary), var(--primary-dark))', borderRadius: 12, alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '1.4rem', boxShadow: '0 4px 14px rgba(99,102,241,0.35)' }}>

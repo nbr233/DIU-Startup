@@ -916,3 +916,64 @@
 .pd-main-img-wrap {
   overflow: hidden;
 }
+
+/* ========================================
+   RESPONSIVENESS (MEDIA QUERIES)
+======================================== */
+
+@media (max-width: 1024px) {
+  .pd-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pd-gallery {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-layout {
+    grid-template-columns: 1fr;
+  }
+  .pd-sticky-bar {
+    padding: 10px 16px;
+    gap: 8px;
+  }
+  .pd-sticky-price {
+    font-size: 1.1rem;
+  }
+  .pd-sticky-bar .pd-add-cart-btn,
+  .pd-sticky-bar .pd-buy-now-btn {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .pd-main-img-wrap {
+    height: 280px;
+  }
+  .pd-main-img {
+    max-height: 245px;
+  }
+  .pd-gallery {
+    padding: 12px;
+  }
+  .pd-info {
+    padding: 16px;
+  }
+  .pd-title {
+    font-size: 1.15rem;
+  }
+  .pd-price-now {
+    font-size: 1.6rem;
+  }
+  .pd-highlights-list {
+    grid-template-columns: 1fr;
+  }
+  .pd-thumb {
+    width: 60px;
+    height: 60px;
+  }
+}
+

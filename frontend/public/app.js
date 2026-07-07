@@ -368,6 +368,22 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ====== CATEGORY SEE ALL TOGGLE (Mobile) ======
+function toggleCategoryExpand(btn) {
+  const grid = document.getElementById('categories-grid');
+  if (!grid) return;
+  const isExpanded = grid.classList.toggle('cat-expanded');
+  const icon = document.getElementById('cat-see-all-icon');
+  if (isExpanded) {
+    btn.innerHTML = 'See Less <i class="fas fa-chevron-up" id="cat-see-all-icon"></i>';
+  } else {
+    btn.innerHTML = 'See All <i class="fas fa-chevron-down" id="cat-see-all-icon"></i>';
+    // Smooth scroll back to categories section
+    const section = document.getElementById('categories-section');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 window.addEventListener('scroll', () => {
   const btn = document.getElementById('scroll-top-btn');
   if (btn) btn.classList.toggle('visible', window.scrollY > 400);

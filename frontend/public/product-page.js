@@ -739,3 +739,31 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 });
+
+// ====== MOBILE DRAWER (shared with index.html) ======
+function openMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('mobile-drawer-overlay');
+  if (!drawer || !overlay) return;
+  drawer.classList.add('open');
+  overlay.style.display = 'block';
+  setTimeout(() => overlay.classList.add('active'), 10);
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('mobile-drawer-overlay');
+  if (!drawer || !overlay) return;
+  drawer.classList.remove('open');
+  overlay.classList.remove('active');
+  setTimeout(() => { overlay.style.display = 'none'; }, 300);
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMobileDrawer();
+    if (cartOpen) toggleCart(null);
+  }
+});

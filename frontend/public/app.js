@@ -143,6 +143,12 @@ function updateCart() {
 
   document.getElementById('cart-badge').textContent = count;
   document.getElementById('cart-total').textContent = `৳${total.toLocaleString('en-IN')}`;
+  // Sync mobile bottom nav cart badge
+  const mobBadge = document.getElementById('mob-cart-badge');
+  if (mobBadge) {
+    mobBadge.textContent = count;
+    mobBadge.style.display = count > 0 ? 'flex' : 'none';
+  }
 
   const itemsEl = document.getElementById('cart-items');
 
@@ -437,5 +443,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Update cart on load & init mob badge visibility
+  updateCart();
+  const mobBadge = document.getElementById('mob-cart-badge');
+  const initCount = getCart().reduce((s,i) => s + i.qty, 0);
+  if (mobBadge) mobBadge.style.display = initCount > 0 ? 'flex' : 'none';
+
   console.log('%c🚀 DIU Startup E-Commerce Loaded!', 'color:#f57224;font-size:18px;font-weight:bold;');
+});
+
+// ====== MOBILE DRAWER ======
+function openMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('mobile-drawer-overlay');
+  if (!drawer || !overlay) return;
+  drawer.classList.add('open');
+  overlay.style.display = 'block';
+  setTimeout(() => overlay.classList.add('active'), 10);
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('mobile-drawer-overlay');
+  if (!drawer || !overlay) return;
+  drawer.classList.remove('open');
+  overlay.classList.remove('active');
+  setTimeout(() => { overlay.style.display = 'none'; }, 300);
+  document.body.style.overflow = '';
+}
+
+// Close drawer on ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMobileDrawer();
+    if (cartOpen) toggleCart(null);
+  }
 });

@@ -33,6 +33,11 @@
   <!-- HEADER -->
   <header class="header" id="main-header">
     <div class="container header-inner">
+      <!-- Mobile Hamburger -->
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="openMobileDrawer()" aria-label="Open Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
       <a href="#" class="logo" id="site-logo">
         <div class="logo-icon"><i class="fas fa-rocket"></i></div>
         <div class="logo-text">
@@ -522,6 +527,81 @@
 
   <!-- Toast -->
   <div class="toast" id="toast-notification"></div>
+
+  <!-- ====== MOBILE DRAWER ====== -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="closeMobileDrawer()"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-logo">
+        <i class="fas fa-rocket"></i> DIU Startup
+      </div>
+      <button class="mobile-drawer-close" onclick="closeMobileDrawer()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-drawer-user">
+      <div class="mobile-drawer-user-avatar"><i class="fas fa-user"></i></div>
+      <div class="mobile-drawer-user-info">
+        <strong>Hello, Guest!</strong>
+        <span>Sign in / Register</span>
+      </div>
+    </div>
+
+    <div class="mobile-drawer-section-title">Shop by Category</div>
+    <ul class="mobile-drawer-nav">
+      <li><a href="#"><i class="fas fa-mobile-alt"></i> Electronics</a></li>
+      <li><a href="#"><i class="fas fa-tshirt"></i> Fashion</a></li>
+      <li><a href="#"><i class="fas fa-couch"></i> Home & Living</a></li>
+      <li><a href="#"><i class="fas fa-magic"></i> Beauty</a></li>
+      <li><a href="#"><i class="fas fa-running"></i> Sports</a></li>
+      <li><a href="#"><i class="fas fa-gamepad"></i> Gaming</a></li>
+      <li><a href="#"><i class="fas fa-baby"></i> Baby & Kids</a></li>
+      <li><a href="#"><i class="fas fa-book"></i> Books</a></li>
+      <li><a href="#"><i class="fas fa-shopping-basket"></i> Grocery</a></li>
+    </ul>
+
+    <div class="mobile-drawer-section-title">My Account</div>
+    <ul class="mobile-drawer-nav">
+      <li><a href="#"><i class="fas fa-user-circle"></i> My Profile</a></li>
+      <li><a href="#"><i class="fas fa-shopping-bag"></i> My Orders</a></li>
+      <li><a href="#"><i class="fas fa-heart"></i> Wishlist</a></li>
+      <li><a href="#"><i class="fas fa-map-marker-alt"></i> Saved Addresses</a></li>
+      <li><a href="#" id="top-help-link-mobile"><i class="fas fa-headset"></i> Help Center</a></li>
+    </ul>
+
+    <div class="mobile-drawer-section-title">Seller & Admin</div>
+    <ul class="mobile-drawer-nav">
+      <li><a href="shop/index.html"><i class="fas fa-store"></i> Seller Dashboard</a></li>
+      <li><a href="admin/index.html" style="color:#6c63ff"><i class="fas fa-shield-halved" style="color:#6c63ff"></i> Super Admin</a></li>
+    </ul>
+
+    <div class="mobile-drawer-footer">&copy; 2024 DIU Startup. All rights reserved.</div>
+  </div>
+
+  <!-- ====== MOBILE BOTTOM NAVIGATION ====== -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <div class="mobile-bottom-nav-inner">
+      <a href="#" class="mob-nav-item active" id="mob-nav-home">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <button class="mob-nav-item" id="mob-nav-categories" onclick="openMobileDrawer()">
+        <i class="fas fa-th-large"></i>
+        <span>Categories</span>
+      </button>
+      <button class="mob-nav-item" id="mob-nav-cart" onclick="toggleCart(event)">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+        <span class="mob-nav-cart-badge" id="mob-cart-badge">0</span>
+      </button>
+      <a href="#" class="mob-nav-item" id="mob-nav-wishlist">
+        <i class="fas fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+      <a href="#" class="mob-nav-item" id="mob-nav-account">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </div>
+  </nav>
 
   <!-- Scroll Top -->
   <button class="scroll-top" id="scroll-top-btn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
